@@ -1,0 +1,5 @@
+name "mlparser"
+description "Markup Language Parser for Dlang/C++"
+copyright "Copyright © 2015, S.Percentage"
+authors "S.Percentage"
+targetType "dynamicLibrary"
