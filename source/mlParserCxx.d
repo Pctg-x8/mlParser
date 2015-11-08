@@ -50,7 +50,7 @@ shared static ~this()
 extern(C)
 {
 	// Return value means same as main()
-	int parseString(const(char)* pInput, IDocumentReceptor receptor)
+	export int parseString(const(char)* pInput, IDocumentReceptor receptor)
 	{
 		auto cop = pInput.fromStringz.idup;
 		auto r = mlParseString(cop);
@@ -84,9 +84,9 @@ void copy(ITagReceptor receptor, const Tag origin)
 }
 void copy(IContentReceptor receptor, const Content origin)
 {
-	if(origin.type() == typeid(Tag))
+	if(origin.type() == typeid(const(Tag)))
 	{
-		receptor.requestTagReceptor().copy(origin.get!Tag);
+		receptor.requestTagReceptor().copy(origin.get!(const(Tag)));
 	}
 	else
 	{

@@ -7,4 +7,5 @@ __test__library__
 mlparser2
 test/
 *.so
-
+*.dll
+*.exe

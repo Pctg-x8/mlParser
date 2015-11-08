@@ -1,0 +1,7 @@
+LIBRARY		'mlParser.dll'
+DESCRIPTION	'Simple Markup Language Parser Library for Dlang/C++'
+
+EXETYPE		NT
+SUBSYSTEM	WINDOWS
+CODE		SHARED EXECUTE
+DATA		WRITE
