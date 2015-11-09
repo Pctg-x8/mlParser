@@ -9,3 +9,5 @@ test/
 *.so
 *.dll
 *.exe
+*.swp
+*.html

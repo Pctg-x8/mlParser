@@ -37,13 +37,13 @@ import core.stdc.stdio;
 shared static this()
 {
 	//Runtime.initialize();
-	printf("StartDLL\n");
-	writeln("StartDLL");
+	// printf("StartDLL\n");
+	// writeln("StartDLL");
 }
 shared static ~this()
 {
-	writeln("EndDLL");
-	printf("EndDLL\n");
+	// writeln("EndDLL");
+	// printf("EndDLL\n");
 	//Runtime.terminate();
 }
 

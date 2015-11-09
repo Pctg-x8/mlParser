@@ -44,6 +44,7 @@ unittest
 	assert(parsedStructure !is null);
 	assert(parsedStructure.value.isStrictForm == true);
 	assert(parsedStructure.value.firstTag.name == parsedStructure.value.header.firstTagName);
+	assert(import("dcHome.html").mlParseString.peek!(ParsedData!Document) !is null);
 }
 
 auto mlParseString(string input)
@@ -51,7 +52,7 @@ auto mlParseString(string input)
 	auto r = input._Document;
 	auto rd = r.peek!(ParsedData!Document);
 	if(rd is null) return Failed!Document;
-	if(!rd.rest.empty) return Failed!Document;
+	if(!rd.rest.ignoreSpaces.empty) return Failed!Document;
 	return r;
 }
 
@@ -158,7 +159,7 @@ ParseResult!Tag _Tag(string input)
 		if(tagTerm is null) return alt3();
 		auto scriptData = tagTerm.rest._ScriptBlock.peek!(ParsedData!string);
 		if(scriptData is null) return alt3();
-		auto tagTermSet = input._String("</script>").peek!(ParsedData!void);
+		auto tagTermSet = scriptData.rest._String("</script>").peek!(ParsedData!void);
 		if(tagTermSet is null) return alt3();
 		return Succeeded(new Tag("script", attributeList.value, [TextContent(scriptData.value)]), tagTermSet.rest);
 	}
@@ -314,7 +315,7 @@ auto _String(string input, string target)
 // Parser Support Utils
 pure:
 auto isSpaces(dchar c) { return [' ', '\n', '\r', '\t'].any!(a => c == a); }
-auto isStreamTrap(dchar c) { return c.isSpaces || ['<', '>', '!', '?', '/'].any!(a => c == a); }
+auto isStreamTrap(dchar c) { return c.isSpaces || ['<', '>', '!', '?', '/', '='].any!(a => c == a); }
 auto isContentTrap(dchar c) { return c == '<'; }
 
 auto ignoreSpaces(string input)
